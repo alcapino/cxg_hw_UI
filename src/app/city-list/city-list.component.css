@@ -1,0 +1,9 @@
+agm-map {
+  height: 600px;
+}
+#sidebar{
+    position: fixed;
+    z-index: 99;
+    top: 10%;
+    left: 75%;
+}

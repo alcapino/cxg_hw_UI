@@ -5,18 +5,28 @@
 <div><span>Pressure: </span>{{city.main.pressure}}hPa</div>
 <div><span>Humidity: </span>{{city.main.humidity}}%</div>
 -->
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="6">
+  <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker> -->
+  <agm-marker [latitude]="13.76" [longitude]="121.06"></agm-marker>
+  <agm-marker [latitude]="14.59" [longitude]="120.98"></agm-marker>
+  <agm-marker [latitude]="6.81" [longitude]="125.71"></agm-marker>
+  <agm-marker [latitude]="8.48" [longitude]="124.64"></agm-marker>
+  <agm-marker [latitude]="15.14" [longitude]="120.59"></agm-marker>
+</agm-map>
 
-<div *ngIf="citydetail">
-    <h2>{{citydetail.name}}, {{citydetail.sys.country}}</h2>
-    <div><span>Weather: </span>{{citydetail.weather[0].description}}</div>
-    <div><span>Temperature: </span>{{citydetail.main.temp}}C</div>
-    <div><span>Pressure: </span>{{citydetail.main.pressure}}hPa</div>
-    <div><span>Humidity: </span>{{citydetail.main.humidity}}%</div>
+<div id="sidebar" > 
+    <div *ngIf="citydetail">
+        <h2>{{citydetail.name}}, {{citydetail.sys.country}}</h2>
+        <div><span>Weather: </span>{{citydetail.weather[0].description}}</div>
+        <div><span>Temperature: </span>{{citydetail.main.temp}}C</div>
+        <div><span>Pressure: </span>{{citydetail.main.pressure}}hPa</div>
+        <div><span>Humidity: </span>{{citydetail.main.humidity}}%</div>
+    </div>
+
+    <h2>Cities</h2>
+    <ul class="cities">
+      <li *ngFor="let city of cities" (click)="onSelect(city)">
+        {{city.name}}
+      </li> 
+    </ul>
 </div>
-
-<h2>Cities</h2>
-<ul class="cities">
-  <li *ngFor="let city of cities" (click)="onSelect(city)">
-    {{city.name}}
-  </li>
-</ul>

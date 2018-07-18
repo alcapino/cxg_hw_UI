@@ -11,13 +11,15 @@ import { CxgApiService} from '../cxg-api.service';
   styleUrls: ['./city-list.component.css']
 })
 export class CityListComponent implements OnInit {
-  selectedCity: City
+  selectedCity: City;
   cities: City;
   citydetail: CityDetail;
   /*city: City = {
     "id": 1701668,
     "name": "Manila"
   }*/
+  lat: number = 12.8797;
+  lng: number = 121.7740;
 
   constructor( private cxgapi: CxgApiService) { }
 
