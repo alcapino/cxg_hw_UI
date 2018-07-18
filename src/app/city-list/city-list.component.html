@@ -1,0 +1,22 @@
+<!-- 
+<h2>{{city.name}}, {{city.sys.country}}</h2>
+<div><span>Weather: </span>{{city.weather[0].description}}</div>
+<div><span>Temperature: </span>{{city.main.temp}}C</div>
+<div><span>Pressure: </span>{{city.main.pressure}}hPa</div>
+<div><span>Humidity: </span>{{city.main.humidity}}%</div>
+-->
+
+<div *ngIf="citydetail">
+    <h2>{{citydetail.name}}, {{citydetail.sys.country}}</h2>
+    <div><span>Weather: </span>{{citydetail.weather[0].description}}</div>
+    <div><span>Temperature: </span>{{citydetail.main.temp}}C</div>
+    <div><span>Pressure: </span>{{citydetail.main.pressure}}hPa</div>
+    <div><span>Humidity: </span>{{citydetail.main.humidity}}%</div>
+</div>
+
+<h2>Cities</h2>
+<ul class="cities">
+  <li *ngFor="let city of cities" (click)="onSelect(city)">
+    {{city.name}}
+  </li>
+</ul>

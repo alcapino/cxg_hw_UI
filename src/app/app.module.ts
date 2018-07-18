@@ -1,14 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { CityListComponent } from './city-list/city-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CityListComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
