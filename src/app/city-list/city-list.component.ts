@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { City } from '../city';
 import { CityDetail } from '../citydetail';
 // import { CITIES } from '../mock-cities';
+import { environment } from '../../environments/environment';
 import { CxgApiService} from '../cxg-api.service';
 
 
@@ -12,14 +13,15 @@ import { CxgApiService} from '../cxg-api.service';
 })
 export class CityListComponent implements OnInit {
   selectedCity: City;
-  cities: City;
+  cities: City[];
   citydetail: CityDetail;
   /*city: City = {
     "id": 1701668,
     "name": "Manila"
   }*/
-  lat: number = 12.8797;
-  lng: number = 121.7740;
+  lat: number = environment.mapapi.lat;
+  lng: number = environment.mapapi.lng;
+  zoom: number = environment.mapapi.zoom;
 
   constructor( private cxgapi: CxgApiService) { }
 
@@ -30,7 +32,7 @@ export class CityListComponent implements OnInit {
   getCities(): void {
     //this.cities = this.cxgapi.getCities();
     this.cxgapi.getCities()
-      .subscribe(cities => this.cities = JSON.parse(cities));
+      .subscribe(cities => this.cities = cities);
   }
 
   getCityDetail(cname): void {
@@ -42,6 +44,12 @@ export class CityListComponent implements OnInit {
     //this.selectedCity = city;
     this.getCityDetail(city.name);
     //console.log(city.name);
+  }
+
+  onMarkerClick(city: City): void {
+    // do the zoom zoom
+    this.getCityDetail(city.name);
+    console.log("ano daw? "+city.name);
   }
 
 }

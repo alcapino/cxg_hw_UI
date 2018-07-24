@@ -2,21 +2,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { City } from './city';
 import { CityDetail } from './citydetail';
-//import { CITIES } from './mock-cities';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CxgApiService {
-  private weatherapiUrl = "http://api.openweathermap.org/data/2.5/weather?appid=7c28321f513df745eed19148f4f6ce55&units=metric";
-  private cxgAPIUrl = 'http://127.0.0.1:8000/';
+  private cxgAPIUrl = environment.backendURL;
   
   getCities(): Observable<City[]> {
     return this.http.get<City[]>(this.cxgAPIUrl+"city/").pipe(
       tap(cities => {
-        console.log(cities);
         this.log('fetched cities');
       }),
       catchError(this.handleError('getCities', []))
@@ -26,8 +25,7 @@ export class CxgApiService {
   getCityDetail(cname): Observable<CityDetail[]> {
     return this.http.get<CityDetail[]>(this.cxgAPIUrl+"weather/"+cname+"/").pipe(
       tap(citydetail => {
-        console.log(citydetail);
-        this.log('fetched citydetail'+cname);
+        this.log('fetched citydetail '+cname);
       }),
       catchError(this.handleError('getCityDetail', []))
     );

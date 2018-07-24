@@ -1,17 +1,19 @@
-<!-- 
-<h2>{{city.name}}, {{city.sys.country}}</h2>
-<div><span>Weather: </span>{{city.weather[0].description}}</div>
-<div><span>Temperature: </span>{{city.main.temp}}C</div>
-<div><span>Pressure: </span>{{city.main.pressure}}hPa</div>
-<div><span>Humidity: </span>{{city.main.humidity}}%</div>
--->
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="6">
-  <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker> -->
-  <agm-marker [latitude]="13.76" [longitude]="121.06"></agm-marker>
-  <agm-marker [latitude]="14.59" [longitude]="120.98"></agm-marker>
-  <agm-marker [latitude]="6.81" [longitude]="125.71"></agm-marker>
-  <agm-marker [latitude]="8.48" [longitude]="124.64"></agm-marker>
-  <agm-marker [latitude]="15.14" [longitude]="120.59"></agm-marker>
+<agm-map 
+    [latitude]="lat" 
+    [longitude]="lng" 
+    [zoom]="zoom" 
+    [disableDefaultUI]="true"
+    [zoomControl]="false"
+    >
+  <agm-marker
+    *ngFor="let city of cities" 
+    (markerClick)="onMarkerClick(city)" 
+    [latitude]="city.coord.lat"
+    [longitude]="city.coord.lon">
+    <agm-info-window>
+      <strong>{{city.name}}</strong>
+    </agm-info-window>
+  </agm-marker>
 </agm-map>
 
 <div id="sidebar" > 
