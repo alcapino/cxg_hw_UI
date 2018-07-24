@@ -16,7 +16,7 @@ import { AgmCoreModule } from '@agm/core';
     BrowserModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: environment.mapkey
+      apiKey: environment.mapapi.key
     })
   ],
   providers: [],
