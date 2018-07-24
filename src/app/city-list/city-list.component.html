@@ -4,6 +4,8 @@
     [zoom]="zoom" 
     [disableDefaultUI]="true"
     [zoomControl]="false"
+    [usePanning]="true"
+    (mapReady)="mapReady($event)"
     >
   <agm-marker
     *ngFor="let city of cities" 
@@ -17,6 +19,13 @@
 </agm-map>
 
 <div id="sidebar" > 
+    <div (click)="resetMap(city)">
+      <h2>Republic of the<br/>Philippines</h2>
+      Capital: Manila<br/>
+      ISO 3166 code: PH<br/>
+      Currency: Peso (₱) (PHP)<br/>
+      Time zone: UTC +8<br/>
+    </div>
     <div *ngIf="citydetail">
         <h2>{{citydetail.name}}, {{citydetail.sys.country}}</h2>
         <div><span>Weather: </span>{{citydetail.weather[0].description}}</div>

@@ -12,18 +12,19 @@ import { CxgApiService} from '../cxg-api.service';
   styleUrls: ['./city-list.component.css']
 })
 export class CityListComponent implements OnInit {
+  protected map: any;
   selectedCity: City;
   cities: City[];
   citydetail: CityDetail;
-  /*city: City = {
-    "id": 1701668,
-    "name": "Manila"
-  }*/
   lat: number = environment.mapapi.lat;
   lng: number = environment.mapapi.lng;
   zoom: number = environment.mapapi.zoom;
 
   constructor( private cxgapi: CxgApiService) { }
+
+  protected mapReady(map) {
+    this.map = map;
+  }
 
   ngOnInit() {
     this.getCities();
@@ -41,15 +42,27 @@ export class CityListComponent implements OnInit {
   }
 
   onSelect(city: City): void {
-    //this.selectedCity = city;
-    this.getCityDetail(city.name);
-    //console.log(city.name);
+    this.projectCity(city);
   }
 
   onMarkerClick(city: City): void {
-    // do the zoom zoom
-    this.getCityDetail(city.name);
-    console.log("ano daw? "+city.name);
+    this.projectCity(city);
+  }
+
+  projectCity(city): void {
+    if (this.map){
+      this.map.setCenter({ lat: city.coord.lat, lng: city.coord.lon });
+      this.map.setZoom(12);
+    }
+    //console.log('clicked', city, { lat: city.coord.lat, lng: city.coord.lon });
+    this.getCityDetail(city.name)
+  }
+
+  resetMap(): void {
+    if (this.map){
+      this.map.setCenter({ lat: this.lat, lng: this.lng });
+      this.map.setZoom(this.zoom);
+    }
   }
 
 }
